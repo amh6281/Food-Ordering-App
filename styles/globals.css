@@ -13,14 +13,13 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+  font-family: "Black And White Picture", sans-serif;
+  font-family: "Black Han Sans", sans-serif;
+  font-family: "Cute Font", cursive;
+  font-family: "Do Hyeon", sans-serif;
+  font-family: "Dokdo", cursive;
+  font-family: "East Sea Dokdo", cursive;
+  font-family: "Gaegu", cursive;
+  font-family: "Gamja Flower", cursive;
+  font-family: "Gothic A1", sans-serif;
 }
