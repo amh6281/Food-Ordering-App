@@ -4,7 +4,7 @@ import styles from "../styles/Featured.module.css";
 import { useState } from "react";
 
 const Featured = () => {
-  const [index, setIndex] = useState(1);
+  const [index, setIndex] = useState(0);
 
   const images = [
     "/img/featured.png",
