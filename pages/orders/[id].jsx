@@ -16,13 +16,13 @@ const Order = () => {
         <div className={styles.row}>
           <table className={styles.table}>
             <tbody>
-              <tr className={styles.tr}>
+              <tr className={styles.trTitle}>
                 <th>주문 ID</th>
                 <th>고객</th>
                 <th>주소</th>
                 <th>합계</th>
               </tr>
-              <tr>
+              <tr className={styles.tr}>
                 <td>
                   <span className={styles.id}>135153515</span>
                 </td>
@@ -104,7 +104,7 @@ const Order = () => {
             <b className={styles.totalTextTitle}>할인:</b>₩0
           </div>
           <div className={styles.totalText}>
-            <b className={styles.totalTextTitle}>총합:</b>₩35,800
+            <b className={styles.totalTextTitle}>총 금액:</b>₩35,800
           </div>
           <butto disabled className={styles.button}>
             결제하기

@@ -83,3 +83,55 @@
   justify-content: center;
   align-items: center;
 }
+
+@media screen and (max-width: 480px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .trTitle {
+    display: none;
+  }
+
+  .tr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .id::before {
+    content: "주문ID: ";
+    font-weight: 600;
+  }
+  .name::before {
+    content: "고객명: ";
+    font-weight: 600;
+  }
+  .address::before {
+    content: "주소: ";
+    font-weight: 600;
+  }
+  .total::before {
+    content: "총 금액: ";
+    font-weight: 600;
+  }
+
+  .row:last-child {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .done,
+  .undone,
+  .inProgress {
+    margin-bottom: 20px;
+  }
+
+  .wrapper {
+    width: 100%;
+  }
+}

@@ -8,7 +8,7 @@ const Cart = () => {
       <div className={styles.left}>
         <table className={styles.table}>
           <tbody>
-            <tr className={styles.tr}>
+            <tr className={styles.trTitle}>
               <th>상품</th>
               <th>이름</th>
               <th>토핑 추가</th>
@@ -16,7 +16,7 @@ const Cart = () => {
               <th>수량</th>
               <th>합계</th>
             </tr>
-            <tr>
+            <tr className={styles.tr}>
               <td>
                 <div className={styles.imgContainer}>
                   <Image
@@ -43,7 +43,7 @@ const Cart = () => {
                 <span className={styles.total}>₩35,800</span>
               </td>
             </tr>
-            <tr>
+            <tr className={styles.tr}>
               <td>
                 <div className={styles.imgContainer}>
                   <Image
