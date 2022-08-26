@@ -56,8 +56,8 @@ const Cart = () => {
               });
           }}
           onApprove={function (data, actions) {
-            return actions.order.capture().then(function () {
-              // Your code here after capture the order
+            return actions.order.capture().then(function (details) {
+              console.log(details);
             });
           }}
         />
@@ -78,6 +78,8 @@ const Cart = () => {
               <th>수량</th>
               <th>합계</th>
             </tr>
+          </tbody>
+          <tbody>
             {cart.products.map((product) => (
               <tr className={styles.tr} key={product._id}>
                 <td>
@@ -133,7 +135,8 @@ const Cart = () => {
               <button className={styles.payButton}>CASH ON DELIVERY</button>
               <PayPalScriptProvider
                 options={{
-                  "client-id": "test",
+                  "client-id":
+                    "AaobSmOTcaBUuvj-lfBSioQ8A6fkThbJdFpyizWFB9KEAdVpO-wO3RwcuJ-_z5ZyiZX6nCH8LyARhXMo",
                   components: "buttons",
                   currency: "USD",
                 }}
