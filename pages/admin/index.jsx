@@ -6,6 +6,7 @@ import styles from "../../styles/Admin.module.css";
 const Index = ({ orders, products }) => {
   const [pizzaList, setPizzaList] = useState(products);
   const [orderList, setOrderList] = useState(orders);
+  const status = ["상품준비중", "배달중", "도착"];
 
   const handleDelete = async (id) => {
     console.log(id);
@@ -14,6 +15,22 @@ const Index = ({ orders, products }) => {
         "http://localhost:3000/api/products/" + id
       );
       setPizzaList(pizzaList.filter((pizza) => pizza._id !== id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleStatus = async (id) => {
+    const item = orderList.filter((order) => order._id === id)[0];
+    const currentStatus = item.status;
+    try {
+      const res = await axios.put("http://localhost:3000/api/orders/" + id, {
+        status: currentStatus + 1,
+      });
+      setOrderList([
+        res.data,
+        ...orderList.filter((order) => order._id !== id),
+      ]);
     } catch (err) {
       console.log(err);
     }
@@ -75,18 +92,28 @@ const Index = ({ orders, products }) => {
               <th>Action</th>
             </tr>
           </tbody>
-          <tbody>
-            <tr className={styles.trTitle}>
-              <td>{"2313412123213".slice(0, 5)}...</td>
-              <td>John Doe</td>
-              <td>25000</td>
-              <td>paid</td>
-              <td>preparing</td>
-              <td>
-                <button>Next stage</button>
-              </td>
-            </tr>
-          </tbody>
+          {orderList.map((order) => (
+            <tbody key={order._id}>
+              <tr className={styles.trTitle}>
+                <td>{order._id.slice(0, 5)}...</td>
+                <td>{order.customer}</td>
+                <td>{order.total}</td>
+                <td>
+                  {order.method === 0 ? (
+                    <span>카드결제</span>
+                  ) : (
+                    <span>현금결제</span>
+                  )}
+                </td>
+                <td>{status[order.status]}</td>
+                <td>
+                  <button onClick={() => handleStatus(order._id)}>
+                    Next stage
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          ))}
         </table>
       </div>
     </div>
