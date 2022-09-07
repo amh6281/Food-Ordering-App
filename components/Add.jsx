@@ -8,8 +8,14 @@ const Add = ({ setClose }) => {
   const [title, setTitle] = useState(null);
   const [desc, setDesc] = useState(null);
   const [prices, setPrices] = useState([]);
-  const [extra, setExtra] = useState(null);
   const [extraOptions, setExtraOptions] = useState([]);
+  const [extra, setExtra] = useState(null);
+
+  const changePrice = (e, index) => {
+    const currentPrices = prices;
+    currentPrices[index] = e.target.value;
+    setPrices(currentPrices);
+  };
 
   const handleExtraInput = (e) => {
     setExtra({ ...extra, [e.target.name]: e.target.value });
@@ -19,13 +25,31 @@ const Add = ({ setClose }) => {
     setExtraOptions((prev) => [...prev, extra]);
   };
 
-  const changePrice = (e, index) => {
-    const currentPrices = prices;
-    currentPrices[index] = e.target.value;
-    setPrices(currentPrices);
-  };
+  const handleCreate = async () => {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "uploads");
+    try {
+      const uploadRes = await axios.post(
+        "https://api.cloudinary.com/v1_1/dfiijzk7o/image/upload",
+        data
+      );
 
-  const handleCreate = async () => {};
+      const { url } = uploadRes.data;
+      const newProduct = {
+        title,
+        desc,
+        prices,
+        extraOptions,
+        img: url,
+      };
+
+      await axios.post("http://localhost:3000/api/products", newProduct);
+      setClose(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -33,13 +57,13 @@ const Add = ({ setClose }) => {
         <span onClick={() => setClose(true)} className={styles.close}>
           X
         </span>
-        <h1>피자 추가</h1>
+        <h1>Add a new Pizza</h1>
         <div className={styles.item}>
-          <label className={styles.label}>이미지 선택</label>
+          <label className={styles.label}>Choose an image</label>
           <input type="file" onChange={(e) => setFile(e.target.files[0])} />
         </div>
         <div className={styles.item}>
-          <label className={styles.label}>제품명</label>
+          <label className={styles.label}>Title</label>
           <input
             className={styles.input}
             type="text"
@@ -47,38 +71,38 @@ const Add = ({ setClose }) => {
           />
         </div>
         <div className={styles.item}>
-          <label className={styles.label}>제품 설명</label>
+          <label className={styles.label}>Desc</label>
           <textarea
             rows={4}
             type="text"
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => setDesc(e.target.value)}
           />
         </div>
         <div className={styles.item}>
-          <label className={styles.label}>가격</label>
+          <label className={styles.label}>Prices</label>
           <div className={styles.priceContainer}>
             <input
               className={`${styles.input} ${styles.inputSm}`}
               type="number"
-              placeholder="R"
+              placeholder="Small"
               onChange={(e) => changePrice(e, 0)}
             />
             <input
               className={`${styles.input} ${styles.inputSm}`}
               type="number"
-              placeholder="L"
+              placeholder="Medium"
               onChange={(e) => changePrice(e, 1)}
             />
             <input
               className={`${styles.input} ${styles.inputSm}`}
               type="number"
-              placeholder="F"
+              placeholder="Large"
               onChange={(e) => changePrice(e, 2)}
             />
           </div>
         </div>
         <div className={styles.item}>
-          <label className={styles.label}>추가 선택</label>
+          <label className={styles.label}>Extra</label>
           <div className={styles.extra}>
             <input
               className={`${styles.input} ${styles.inputSm}`}
@@ -95,7 +119,7 @@ const Add = ({ setClose }) => {
               onChange={handleExtraInput}
             />
             <button className={styles.extraButton} onClick={handleExtra}>
-              추가하기
+              Add
             </button>
           </div>
           <div className={styles.extraItems}>
@@ -107,7 +131,7 @@ const Add = ({ setClose }) => {
           </div>
         </div>
         <button className={styles.addButton} onClick={handleCreate}>
-          생성
+          Create
         </button>
       </div>
     </div>
