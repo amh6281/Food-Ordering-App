@@ -14,7 +14,7 @@
   <br />
   <h2>주문</h2>
 <div>
-  <img src="https://user-images.githubusercontent.com/83646986/188770560-c519e830-9ef6-4cc6-9436-16953541d954.gif" />
+  <img src="https://user-images.githubusercontent.com/83646986/188770560-c519e830-9ef6-4cc6-9436-16953541d954.gif" width="590px" height="290px" />
   <h4>원하는 제품의 크기와 토핑 및 소스를 장바구니에 추가하여 주문하는 현금 결제방식의 주문 기능입니다.</h4>
 </div>
 <br />
